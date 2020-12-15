@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 
-api = FastAPI()
+
 
 from db.user_db import UserInDB
 from db.user_db import update_user, get_user
@@ -14,18 +14,22 @@ from models.transaction_models import TransactionIn, TransactionOut
 import datetime
 
 from fastapi.middleware.cors import CORSMiddleware
+
+api = FastAPI()
+
 origins = [
 "http://localhost.tiangolo.com", "https://localhost.tiangolo.com",
-"http://localhost", "http://localhost:8080", "https://realidad-financiera-front1.herokuapp.com"
+"http://localhost", "http://localhost:8080", "hhttps://realidad-financiera-front1.herokuapp.com"
 ]
-#api.add_middleware(
-#    CORSMiddleware, allow_origins=origins,
-#    allow_credentials=True, allow_methods=["*"], allow_headers=["*"],
 
 api.add_middleware(
-CORSMiddleware, allow_origins=["*"],
-allow_credentials=True, allow_methods=["*"], allow_headers=["*"],
-)
+   CORSMiddleware, allow_origins=origins,
+  allow_credentials=True, allow_methods=["*"], allow_headers=["*"],
+
+#api.add_middleware(
+#CORSMiddleware, allow_origins=["*"],
+#allow_credentials=True, allow_methods=["*"], allow_headers=["*"],
+#)
 
 @api.post("/user/auth/")
 async def auth_user(user_in: UserIn):
